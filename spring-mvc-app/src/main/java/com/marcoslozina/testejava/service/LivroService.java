@@ -10,9 +10,9 @@ public interface LivroService {
 
     Livro findByNome(String nome);
 
-    void save(Livro livro);
+    String save(Livro livro);
 
-    void update(Livro livro);
+    String update(Livro livro);
 
     void deleteById(long id);
 

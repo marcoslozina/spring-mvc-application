@@ -14,8 +14,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -26,6 +24,8 @@ import org.testng.annotations.Test;
 import com.marcoslozina.testejava.dao.PessoaDao;
 import com.marcoslozina.testejava.model.Pessoa;
 import com.marcoslozina.testejava.service.PessoaServiceImpl;
+
+import junit.framework.Assert;
 
 public class PessoaServiceImplTest {
     @Mock
@@ -65,10 +65,11 @@ public class PessoaServiceImplTest {
     }
 
     @Test
-    public void savePessoa() {
+    public String savePessoa() {
 	doNothing().when(dao).save(any(Pessoa.class));
 	pessoaService.save(any(Pessoa.class));
 	verify(dao, atLeastOnce()).save(any(Pessoa.class));
+	return anyString();
     }
 
     @Test

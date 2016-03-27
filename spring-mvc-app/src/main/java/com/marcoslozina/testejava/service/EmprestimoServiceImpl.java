@@ -22,11 +22,13 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     @Autowired
     EmprestimoDao dao;
 
-    public void save(Emprestimo emprestimo) {
+    public String save(Emprestimo emprestimo) {
 	dao.save(emprestimo);
+	return "Emprestimo para: " + emprestimo.getPessoa().getNome() + " " + " livro: " 	+ emprestimo.getLivro().getNome()
+			+ " foi cadastrada com sucesso!";
     }
 
-    public void update(Emprestimo emprestimo) {
+    public String update(Emprestimo emprestimo) {
 	Emprestimo entity = dao.findById(emprestimo.getIdemprestimo());
 	if (entity != null) {
 	    entity.setDataemprestimo(emprestimo.getDataemprestimo());
@@ -35,6 +37,9 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 	    entity.setLivro(emprestimo.getLivro());
 	    entity.setPessoa(emprestimo.getPessoa());
 	}
+	return "Emprestimo da pessoa: "	+ emprestimo.getPessoa().getNome() + " " + " livro: "	+ emprestimo.getLivro().getNome()
+		+ " foi atualizado com sucesso!";
+	
 
     }
 
@@ -88,6 +93,7 @@ public class EmprestimoServiceImpl implements EmprestimoService {
 
     public void deleteById(long id) {
 	dao.deleteById(id);
+	
 
     }
 

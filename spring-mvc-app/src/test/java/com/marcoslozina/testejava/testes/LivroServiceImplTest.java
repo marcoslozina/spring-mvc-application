@@ -12,8 +12,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -24,6 +22,8 @@ import org.testng.annotations.Test;
 import com.marcoslozina.testejava.dao.LivroDao;
 import com.marcoslozina.testejava.model.Livro;
 import com.marcoslozina.testejava.service.LivroServiceImpl;
+
+import junit.framework.Assert;
 
 public class LivroServiceImplTest {
     @Mock
@@ -54,10 +54,11 @@ public class LivroServiceImplTest {
     }
 
     @Test
-    public void saveLivro() {
+    public String saveLivro() {
 	doNothing().when(dao).save(any(Livro.class));
 	livroService.save(any(Livro.class));
 	verify(dao, atLeastOnce()).save(any(Livro.class));
+	return anyString();
     }
 
     @Test

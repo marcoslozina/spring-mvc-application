@@ -72,19 +72,14 @@ public class AppController {
 	}
 
 	if (!pessoaService.isPessoaCPFunique(pessoa.getCpf())) {
-	    FieldError cpfError = new FieldError("pessoa", "cpf",
-		    messageSource.getMessage("non.unique.cpf",
-			    new String[] { pessoa.getCpf() },
+	    FieldError cpfError = new FieldError("pessoa", "cpf",  messageSource.getMessage("non.unique.cpf", new String[] { pessoa.getCpf() },
 			    Locale.getDefault()));
 	    result.addError(cpfError);
 	    return "pessoaadd";
 	}
 
-	pessoaService.save(pessoa);
-
-	model.addAttribute("success", "Pessoa " + pessoa.getNome() + " "
-		+ " CPF: " + pessoa.getCpf() + " foi cadastrada com sucesso!");
-	// return "success";
+	model.addAttribute("success", pessoaService.save(pessoa));
+	
 	return "pessoaRegistrationsuccess";
     }
 
@@ -104,10 +99,7 @@ public class AppController {
 	    return "pessoaadd";
 	}
 
-	pessoaService.update(pessoa);
-
-	model.addAttribute("success", "Pessoa: " + pessoa.getNome() + " "
-		+ " CPF: " + pessoa.getCpf() + " foi atualizado com sucesso!");
+	model.addAttribute("success", pessoaService.update(pessoa));
 	return "pessoaRegistrationsuccess";
     }
 
@@ -143,12 +135,8 @@ public class AppController {
 	    return "livroadd";
 	}
 
-	livroService.save(livro);
-
-	model.addAttribute("success", "Livro: " + livro.getNome() + " "
-		+ " escritor: " + livro.getEscritor()
-		+ " foi cadastrada com sucesso!");
-	// return "success";
+	model.addAttribute("success", livroService.save(livro));
+	
 	return "livroRegistrationsuccess";
     }
 
@@ -168,11 +156,7 @@ public class AppController {
 	    return "livroadd";
 	}
 
-	livroService.update(livro);
-
-	model.addAttribute("success", "Livro: " + livro.getNome() + " "
-		+ " escritor: " + livro.getEscritor()
-		+ " foi atualizado com sucesso!");
+	model.addAttribute("success", livroService.update(livro));
 	return "livroRegistrationsuccess";
     }
 
@@ -267,12 +251,8 @@ public class AppController {
 	    return "emprestimoadd";
 	}
 
-	emprestimoService.save(emprestimo);
-
-	model.addAttribute("success", "Emprestimo para: "
-		+ emprestimo.getPessoa().getNome() + " " + " livro: "
-		+ emprestimo.getLivro().getNome()
-		+ " foi cadastrada com sucesso!");
+	
+	model.addAttribute("success", emprestimoService.save(emprestimo));
 	// return "success";
 	return "emprestimoRegistrationsuccess";
     }
@@ -322,12 +302,7 @@ public class AppController {
 	    return "emprestimoadd";
 	}
 
-	emprestimoService.update(emprestimo);
-
-	model.addAttribute("success", "Emprestimo da pessoa: "
-		+ emprestimo.getPessoa().getNome() + " " + " livro: "
-		+ emprestimo.getLivro().getNome()
-		+ " foi atualizado com sucesso!");
+	model.addAttribute("success", emprestimoService.update(emprestimo));
 	return "emprestimoRegistrationsuccess";
     }
 

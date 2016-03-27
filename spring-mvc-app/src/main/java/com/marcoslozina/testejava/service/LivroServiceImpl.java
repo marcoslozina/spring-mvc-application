@@ -25,8 +25,9 @@ public class LivroServiceImpl implements LivroService {
 	return dao.findByNome(nome);
     }
 
-    public void save(Livro livro) {
+    public String save(Livro livro) {
 	dao.save(livro);
+	return 	"Livro: " + livro.getNome() + " "+ " escritor: " + livro.getEscritor()	+ " foi cadastrada com sucesso!";
     }
 
     public void deleteById(long id) {
@@ -37,7 +38,7 @@ public class LivroServiceImpl implements LivroService {
 	return dao.findAllLivros();
     }
 
-    public void update(Livro livro) {
+    public String update(Livro livro) {
 
 	Livro entity = dao.findById(livro.getIdlivro());
 	if (entity != null) {
@@ -48,6 +49,7 @@ public class LivroServiceImpl implements LivroService {
 	    entity.setIdlivro(livro.getIdlivro());
 	    entity.setNome(livro.getNome());
 	}
+	return "Livro: " + livro.getNome() + " " + " escritor: " + livro.getEscritor()+ " foi atualizado com sucesso!";
 
     }
 }

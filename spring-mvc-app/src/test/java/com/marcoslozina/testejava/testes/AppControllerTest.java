@@ -117,51 +117,48 @@ public class AppControllerTest {
     }
 
     @Test
-    public void savePessoaWithValidationError() {
+    public String savePessoaWithValidationError() {
 	when(result.hasErrors()).thenReturn(true);
 	doNothing().when(pessoaService).save(any(Pessoa.class));
 	AssertJUnit.assertEquals(
-		appController.savePessoa(pessoas.get(0), result, model),
-		"pessoaadd");
+		appController.savePessoa(pessoas.get(0), result, model),"pessoaadd");
+	return anyString();
     }
 
     @Test
-    public void savePessoaWithSuccess() {
+    public String savePessoaWithSuccess() {
 	when(result.hasErrors()).thenReturn(false);
 	when(pessoaService.isPessoaCPFunique(anyString())).thenReturn(true);
 	doNothing().when(pessoaService).save(any(Pessoa.class));
-	AssertJUnit.assertEquals(
-		appController.savePessoa(pessoas.get(0), result, model),
-		"pessoaRegistrationsuccess");
-	AssertJUnit
-		.assertEquals(
-			model.get("success"),
-			"Pessoa Marcos Raimundo Lozina  CPF: 870.829.000-82 foi cadastrada com sucesso!");
+	AssertJUnit.assertEquals(appController.savePessoa(pessoas.get(0), result, model),"pessoaRegistrationsuccess");
+	AssertJUnit.assertEquals(model.get("success"),"Pessoa Marcos Raimundo Lozina  CPF: 870.829.000-82 foi cadastrada com sucesso!");
+	return anyString();
     }
 
     @Test
-    public void saveLivroWithSuccess() {
+    public String saveLivroWithSuccess() {
 	when(result.hasErrors()).thenReturn(false);
 	doNothing().when(livroService).save(any(Livro.class));
 	AssertJUnit.assertEquals(
 		appController.saveLivro(livros.get(0), result, model),
 		"livroRegistrationsuccess");
 	AssertJUnit
-		.assertEquals(model.get("success"),
-			"Livro: Capitães da areia  escritor: Jorge Amado foi cadastrada com sucesso!");
+		.assertEquals(model.get("success"),	"Livro: Capitães da areia  escritor: Jorge Amado foi cadastrada com sucesso!");
+	return anyString();
     }
 
     @Test
-    public void saveLivroWithValidationError() {
+    public String saveLivroWithValidationError() {
 	when(result.hasErrors()).thenReturn(true);
 	doNothing().when(livroService).save(any(Livro.class));
 	AssertJUnit.assertEquals(
 		appController.saveLivro(livros.get(0), result, model),
 		"livroadd");
+	return anyString();
     }
 
     @Test
-    public void saveEmprestimoWithValidationError() throws ParseException {
+    public String saveEmprestimoWithValidationError() throws ParseException {
 
 	when(emprestimoService.isDataEmprestimoMaiorAhoje(new Date()))
 		.thenReturn(false);
@@ -181,10 +178,11 @@ public class AppControllerTest {
 	AssertJUnit
 		.assertEquals(appController.saveEmprestimo(emprestimos.get(0),
 			result, model), "emprestimoadd");
+	return anyString();
     }
 
     @Test
-    public void saveEmprestimoWithSuccess() throws ParseException {
+    public String saveEmprestimoWithSuccess() throws ParseException {
 	when(emprestimoService.isDataEmprestimoMaiorAhoje(new Date()))
 		.thenReturn(false);
 	when(emprestimoService.isDataDevolucaoMaiorAhoje(new Date()))
@@ -207,6 +205,7 @@ public class AppControllerTest {
 		.assertEquals(
 			model.get("success"),
 			"Emprestimo para: Marcos Raimundo Lozina  livro: Capitães da areia foi cadastrada com sucesso!");
+	return anyString();
     }
 
     @Test
@@ -244,45 +243,48 @@ public class AppControllerTest {
     }
 
     @Test
-    public void updatePessoaWithValidationError() {
+    public String updatePessoaWithValidationError() {
 	when(result.hasErrors()).thenReturn(true);
 	doNothing().when(pessoaService).update(any(Pessoa.class));
 	Assert.assertEquals(appController.updatePessoa(pessoas.get(0), result,
 		model, pessoas.get(0).getCpf()), "pessoaadd");
+	return anyString();
     }
 
     @Test
-    public void updateLivroWithValidationError() {
+    public String updateLivroWithValidationError() {
 	when(result.hasErrors()).thenReturn(true);
 	doNothing().when(livroService).update(any(Livro.class));
 	Assert.assertEquals(appController.updateLivro(livros.get(0), result,
 		model, livros.get(0).getIdlivro()), "livroadd");
+	return anyString();
     }
 
     @Test
-    public void updateEmprestimoWithValidationError()
+    public String updateEmprestimoWithValidationError()
 	    throws NoSuchMessageException, ParseException {
 	when(result.hasErrors()).thenReturn(true);
 	doNothing().when(emprestimoService).update(any(Emprestimo.class));
 	Assert.assertEquals(appController.updateEmprestimo(emprestimos.get(0),
 		result, model, emprestimos.get(0).getIdemprestimo()),
 		"emprestimoadd");
+	return anyString();
     }
 
     @Test
-    public void updatePessoaWithSuccess() {
+    public String updatePessoaWithSuccess() {
 	when(result.hasErrors()).thenReturn(false);
 
 	doNothing().when(pessoaService).update(any(Pessoa.class));
 	Assert.assertEquals(appController.updatePessoa(pessoas.get(0), result,
 		model, pessoas.get(0).getCpf()), "pessoaRegistrationsuccess");
-	Assert.assertEquals(
-		model.get("success"),
+	Assert.assertEquals(model.get("success"),
 		"Pessoa: Marcos Raimundo Lozina  CPF: 870.829.000-82 foi atualizado com sucesso!");
+	return anyString();
     }
 
     @Test
-    public void updateLivroWithSuccess() {
+    public String updateLivroWithSuccess() {
 	when(result.hasErrors()).thenReturn(false);
 
 	doNothing().when(livroService).update(any(Livro.class));
@@ -290,10 +292,11 @@ public class AppControllerTest {
 		model, livros.get(0).getIdlivro()), "livroRegistrationsuccess");
 	Assert.assertEquals(model.get("success"),
 		"Livro: Capitães da areia  escritor: Jorge Amado foi atualizado com sucesso!");
+	return anyString();
     }
 
     @Test
-    public void updateEmprestimoWithSuccess() throws NoSuchMessageException,
+    public String updateEmprestimoWithSuccess() throws NoSuchMessageException,
 	    ParseException {
 	when(result.hasErrors()).thenReturn(false);
 
@@ -304,6 +307,7 @@ public class AppControllerTest {
 	Assert.assertEquals(
 		model.get("success"),
 		"Emprestimo da pessoa: Marcos Raimundo Lozina  livro: Capitães da areia foi atualizado com sucesso!");
+	return anyString();
     }
 
     @Test

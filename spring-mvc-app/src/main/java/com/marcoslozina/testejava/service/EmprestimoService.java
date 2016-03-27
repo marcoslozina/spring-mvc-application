@@ -12,9 +12,9 @@ public interface EmprestimoService {
 
     Emprestimo findById(long id);
 
-    void save(Emprestimo emprestimo);
+    String save(Emprestimo emprestimo);
 
-    void update(Emprestimo emprestimo);
+    String update(Emprestimo emprestimo);
 
     List<Emprestimo> findAllEmprestimos();
 

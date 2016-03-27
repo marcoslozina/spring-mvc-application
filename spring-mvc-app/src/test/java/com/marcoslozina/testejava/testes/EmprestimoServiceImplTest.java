@@ -2,6 +2,7 @@ package com.marcoslozina.testejava.testes;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyLong;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
@@ -12,8 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import junit.framework.Assert;
 
 import org.joda.time.DateTime;
 import org.mockito.InjectMocks;
@@ -31,6 +30,7 @@ import com.marcoslozina.testejava.model.Livro;
 import com.marcoslozina.testejava.model.Pessoa;
 import com.marcoslozina.testejava.service.EmprestimoServiceImpl;
 
+import junit.framework.Assert;
 public class EmprestimoServiceImplTest {
     @Mock
     EmprestimoDao daoEmprestimo;
@@ -65,10 +65,12 @@ public class EmprestimoServiceImplTest {
     }
 
     @Test
-    public void saveEmprestimo() {
+    public String saveEmprestimo() {
 	doNothing().when(daoEmprestimo).save(any(Emprestimo.class));
 	emprestimoService.save(any(Emprestimo.class));
 	verify(daoEmprestimo, atLeastOnce()).save(any(Emprestimo.class));
+	return anyString();
+
     }
 
     @Test

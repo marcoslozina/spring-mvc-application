@@ -12,9 +12,9 @@ public interface PessoaService {
 
     boolean isPessoaCPFunique(String cpf);
 
-    void save(Pessoa pessoa);
+    String save(Pessoa pessoa);
 
-    void update(Pessoa pessoa);
+    String update(Pessoa pessoa);
 
     void deleteByCPF(String cpf);
 

@@ -25,13 +25,15 @@ public class PessoaServiceImpl implements PessoaService {
 	return dao.findByCPF(cpf);
     }
 
-    public void save(Pessoa pessoa) {
+    public String save(Pessoa pessoa) {
 	dao.save(pessoa);
+	return "Pessoa " + pessoa.getNome() + " " + " CPF: " + pessoa.getCpf() + " foi cadastrada com sucesso!";
 
     }
 
     public void deleteByCPF(String cpf) {
 	dao.deleteByCPF(cpf);
+	
 
     }
 
@@ -39,7 +41,7 @@ public class PessoaServiceImpl implements PessoaService {
 	return dao.findAllPessoas();
     }
 
-    public void update(Pessoa pessoa) {
+    public String update(Pessoa pessoa) {
 	Pessoa entity = dao.findByCPF(pessoa.getCpf());
 	if (entity != null) {
 	    entity.setCpf(pessoa.getCpf());
@@ -49,6 +51,7 @@ public class PessoaServiceImpl implements PessoaService {
 	    entity.setNome(pessoa.getNome());
 
 	}
+	return "Pessoa: " + pessoa.getNome() + " "	+ " CPF: " + pessoa.getCpf() + " foi atualizado com sucesso!";
     }
 
     public boolean isPessoaCPFunique(String cpf) {
